@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
         .json({ message: "Password must be at least 6 characters" });
     }
     const passwordHash = await bcrypt.hash(password, 12);
-    const newUser = new User({
+    const newUser = new Users({
       name,
       email,
       password: passwordHash,

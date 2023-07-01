@@ -14,7 +14,7 @@ app.use(cors());
 app.use(fileUpload({
   useTempFiles: true
 }));
-const BASE_URL = 'http://localhost:500/api'
+const BASE_URL = 'http://localhost:5000/api'
 app.use(`${BASE_URL}/user`, require('./routes/userRouter'));
 app.use(`${BASE_URL}/grammar`, require('./routes/grammarRouter'));
 app.use(`${BASE_URL}/listening`, require('./routes/listeningRouter'));

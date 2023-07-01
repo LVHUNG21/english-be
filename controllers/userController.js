@@ -29,16 +29,14 @@ exports.register = async (req, res) => {
         .json({ message: "Password must be at least 6 characters" });
     }
     const passwordHash = await bcrypt.hash(password, 12);
-    const newUser = {
+    const newUser = new User({
       name,
       email,
       password: passwordHash,
-    };
-    const activation_token = createActivationToken(newUser);
-    const url = `${CLIENT_URL}/user/activate/${activation_token}`;
-    mailConfig.sendEmail(email, mailConfig.activationEmail(url));
+    });
+    await newUser.save();
     return res.status(200).json({
-      message: "Register successfully! Please activate your email to start",
+      message: "Register successfully! Please login to start",
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });

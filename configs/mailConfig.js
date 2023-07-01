@@ -44,17 +44,19 @@ const sendEmail = (to, content) => {
       pass: process.env.NODE_MAILER_PASSWORD,
     },
   });
-
   const mailOptions = {
     from: process.env.NODE_MAILER_USER,
-    to: to,
-    subject: "English Website",
+    to,
+    subject: "Account activation",
     html: content,
   };
-
-  smtpTransport.sendMail(mailOptions, (err, info) => {
-    if (err) return err;
-    return info;
+  smtpTransport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Message sent: " + response.message);
+    }
+    smtpTransport.close();
   });
 };
 
